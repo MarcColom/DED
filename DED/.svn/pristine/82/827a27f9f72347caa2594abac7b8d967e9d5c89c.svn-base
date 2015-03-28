@@ -1,0 +1,31 @@
+package uoc.ei.practica;
+
+import java.util.Date;
+
+public class Revision  {
+
+	private User user;
+	private Date dateTime;
+	private String newSourceCode;
+	private int idRevision;
+
+	public Revision(User user, Date dateTime, String newSourceCode,
+			int idRevision) {
+		this.idRevision=idRevision;
+		this.user = user;
+		this.dateTime=dateTime;
+		this.newSourceCode = newSourceCode;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.idRevision).append(" ").append(this.newSourceCode).append(" ").append(user.getIdUser()).append(" ");
+		
+		return sb.toString();
+	}
+
+	public int getIdRevision() {
+		return this.idRevision;
+	}
+
+}

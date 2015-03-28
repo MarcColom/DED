@@ -1,0 +1,85 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# EP2 test
+
+# ERROR
+mostActiveGroup()
+ERROR: There are no groups
+
+# ERROR
+mostActiveRepository()
+ERROR: There are no repositories
+
+# ERROR
+groups()
+ERROR: There are no groups
+
+# ERROR
+repositories()
+ERROR: There are no repositories
+
+# ERROR
+users()
+ERROR: There are no users
+
+addRepository(REPO1, /repo1, description1)
+void
+addRepository(REPO2, /repo2, description2)
+void
+addRepository(REPO4, /repo4, description4)
+void
+addRepository(REPO5, /repo5, description5)
+void
+
+repositories()
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+
+path: /repo2
+description: description2
+activity: 0
+branches: 
+	Trunk
+
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+path: /repo5
+description: description5
+activity: 0
+branches: 
+	Trunk
+
+
+getRepository(REPO1)
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+
+
+getRepository(REPO4)
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+
+# ERROR
+ERROR: El metode checkout(REPO1, 333) no existeix
+
+addUser(U1, joep@uoc.edu, ****)

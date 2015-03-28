@@ -1,0 +1,64 @@
+package uoc.ei.practica;
+
+import java.util.Date;
+
+import uoc.ei.tads.Iterador;
+import uoc.ei.tads.LlistaEncadenada;
+
+
+public class File extends IdentifiedObject {
+	
+	private LlistaEncadenada<Revision> revisions;
+	
+	public File(String filePath) {
+		super(filePath);
+		this.revisions = new LlistaEncadenada<Revision>();
+	}
+
+	public String toString() {
+		StringBuffer sb= new StringBuffer();
+		sb.append("filePath:").append(super.getIdentifier());
+		if (!this.revisions.estaBuit()) {
+			sb.append(Messages.LS);
+			Iterador<Revision> it = this.revisions.elements();
+			while (it.hiHaSeguent()) {
+				sb.append(Messages.PREFIX).append(it.seguent()).append(Messages.LS);
+			}
+		}
+			
+		return sb.toString();
+	}
+
+	public void addRevision(User user, Date dateTime, 
+			String newSourceCode, int idRevision) {
+		this.revisions.afegirAlFinal(new Revision(user, dateTime, newSourceCode, idRevision ));
+		
+	}
+ 
+	public Revision getRevision(int idRevision) {
+		boolean found = false;
+		Iterador<Revision> it = this.revisions.elements();
+		Revision r = null;
+		
+		while (it.hiHaSeguent() && !found) {
+			r = it.seguent();
+			
+			found = (r.getIdRevision() == idRevision);
+		}
+		return (found?r:null);
+	}
+
+	public Revision getRevisionLessThanEqual(int idRevision) {
+		boolean found = false;
+		Iterador<Revision> it = this.revisions.elements();
+		Revision r = null;
+		Revision aux =null;
+		while (it.hiHaSeguent() && !found) {
+			r = it.seguent();
+			found = (r.getIdRevision() == idRevision);
+			if (!found) aux = r;
+		}
+		return (found?r:aux);
+	}
+
+}

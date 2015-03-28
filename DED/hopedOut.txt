@@ -1,0 +1,405 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# PRACTICA test MARC COLOM ROYO
+
+addRepository(REPO1, /repo1, description1)
+void
+addRepository(REPO2, /repo2, description2)
+void
+addRepository(REPO4, /repo4, description4)
+void
+addRepository(REPO5, /repo5, description5)
+void
+addRepository(REPO9, /repo9, description9)
+void
+
+repositories()
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+
+path: /repo2
+description: description2
+activity: 0
+branches: 
+	Trunk
+
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+path: /repo5
+description: description5
+activity: 0
+branches: 
+	Trunk
+
+path: /repo9
+description: description9
+activity: 0
+branches: 
+	Trunk
+
+
+getRepository(REPO9)
+path: /repo9
+description: description9
+activity: 0
+branches: 
+	Trunk
+
+
+addUser(U1, joep@uoc.edu, ****)
+void
+addUser(J2, joan@uoc.edu, ****)
+void
+addUser(M9, marc@uoc.edu, ****)
+void
+addUser(B3, helenap@uoc.edu, ****)
+void
+addUser(A36, marti@uoc.edu, ****)
+void
+addUser(A16, pepmarti@uoc.edu, ****)
+void
+
+users()
+A16 pepmarti@uoc.edu **** 
+
+A36 marti@uoc.edu **** 
+
+B3 helenap@uoc.edu **** 
+
+J2 joan@uoc.edu **** 
+
+M9 marc@uoc.edu **** 
+
+U1 joep@uoc.edu **** 
+
+
+
+# ERROR
+
+groups()
+ERROR: There are no groups
+
+addGroup(G1, Group 1)
+void
+addGroup(G2, Group 2)
+void
+addGroup(G3, Group 3)
+void
+addGroup(G4, Group 4)
+void
+addGroup(G5, Group 5)
+void
+addGroup(G9, Group 9)
+void
+
+
+groups()
+G1 Group 1 activity: 0
+
+G2 Group 2 activity: 0
+
+G3 Group 3 activity: 0
+
+G4 Group 4 activity: 0
+
+G5 Group 5 activity: 0
+
+G9 Group 9 activity: 0
+
+
+groupAddUser(G1, U1)
+void
+groupAddUser(G2, U1)
+void
+
+groupAddUser(G4, B3)
+void
+groupAddUser(G5, B3)
+void
+
+groupAddUser(G3, A36)
+void
+
+groupAddUser(G9, U1)
+void
+groupAddUser(G9, M9)
+void
+
+users()
+A16 pepmarti@uoc.edu **** 
+
+A36 marti@uoc.edu **** 
+	G3 Group 3 activity: 0
+
+B3 helenap@uoc.edu **** 
+	G4 Group 4 activity: 0
+	G5 Group 5 activity: 0
+
+J2 joan@uoc.edu **** 
+
+M9 marc@uoc.edu **** 
+	G9 Group 9 activity: 0
+
+U1 joep@uoc.edu **** 
+	G1 Group 1 activity: 0
+	G2 Group 2 activity: 0
+	G9 Group 9 activity: 0
+
+
+repositoryAddGroup(REPO1, G1)
+void
+repositoryAddGroup(REPO1, G3)
+void
+
+repositoryAddGroup(REPO9, G9)
+void
+
+repositories()
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+groups: 
+	G1 Group 1 activity: 0
+	G3 Group 3 activity: 0
+
+
+path: /repo2
+description: description2
+activity: 0
+branches: 
+	Trunk
+
+
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+path: /repo5
+description: description5
+activity: 0
+branches: 
+	Trunk
+
+path: /repo9
+description: description9
+activity: 0
+branches: 
+	Trunk
+groups: 
+	G9 Group 9 activity: 0
+
+
+
+commit(REPO1, Trunk, 333, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld (333))
+void
+commit(REPO1, Trunk, 333, U1, 15-10-2014 15:30:00, /src/Main.java, public class Main (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/Test.java, public class Test (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/ApiHelper.java, public class ApiHelper (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/DBUtils.java, public class DBUtils (333))
+void
+
+commit(REPO1, Trunk, 334, U1, 14-10-2014 15:35:00, /src/HelloWorld.java, public class HelloWorld // msg1 (334))
+void
+commit(REPO1, Trunk, 334, U1, 15-10-2014 15:35:00, /src/Main.java, public class Main // msg1 (334))
+void
+
+commit(REPO1, Trunk, 335, U1, 14-10-2014 15:40:00, /src/HelloWorld.java, public class HelloWorld // msg2 (335))
+void
+commit(REPO1, Trunk, 335, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2 (335))
+void
+
+
+# Repo 9
+
+commit(REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file1, fileContent1)
+void
+commit(REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file2, fileContent2)
+void
+commit(REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file3, fileContent3)
+void
+commit(REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file4, fileContent4)
+void
+commit(REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file5, fileContent5)
+void
+
+commit(REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file1, fileContent1.2)
+void
+commit(REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file2, fileContent2.2)
+void
+commit(REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file3, fileContent3.2)
+void
+
+commit(REPO9, Trunk, 003, M9, 01-01-2015 10:00:00, file1, fileContent1.3)
+void
+
+commit(REPO9, Trunk, 004, M9, 01-01-2015 10:00:00, file1, fileContent1.4)
+void
+
+
+mostActiveRepository()
+path: /repo9
+description: description9
+activity: 10
+branches: 
+	Trunk
+groups: 
+	G9 Group 9 activity: 16
+
+
+mostActiveGroup()
+G9 Group 9 activity: 16
+
+
+
+getFile(REPO9, Trunk, 001, file1)
+1 fileContent1 M9 
+
+getFile(REPO9, Trunk, 002, file1)
+2 fileContent1.2 M9 
+
+getFile(REPO9, Trunk, 003, file1)
+3 fileContent1.3 M9 
+
+getFile(REPO9, Trunk, 004, file1)
+4 fileContent1.4 M9 
+
+getFile(REPO9, Trunk, 002, file2)
+2 fileContent2.2 M9 
+
+
+checkout(REPO9, Trunk, 001)
+1 fileContent1 M9 
+1 fileContent2 M9 
+1 fileContent3 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO9, Trunk, 002)
+2 fileContent1.2 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO9, Trunk, 003)
+3 fileContent1.3 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO9, Trunk, 004)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO1, Trunk, 335)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+335 public class HelloWorld // msg2 (335) U1 
+335 public class Main // msg2 (335) U1 
+333 public class Test (333) A36 
+
+branches(REPO9)
+Trunk
+
+branch(REPO9, Trunk, Branch1A, M9)
+void
+
+checkout(REPO9, Trunk, 004)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO9, Branch1A, 004)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+branch(REPO9, Branch1A, Branch1B, M9)
+void
+
+checkout(REPO9, Branch1B, 004)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+branch(REPO9, Branch1B, Branch2A, M9)
+void
+
+checkout(REPO9, Branch2A, 004)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+branches(REPO9)
+Trunk
+Branch1A
+Branch1B
+Branch2A
+
+commit(REPO9, Branch2A, 005, M9, 01-01-2015 12:00:00, file1, fileContent1.5)
+void
+commit(REPO9, Branch2A, 006, M9, 01-01-2015 12:00:00, file1, fileContent1.6)
+void
+commit(REPO9, Branch2A, 003, M9, 01-01-2015 12:00:00, file2, fileContent2.3)
+void
+
+
+checkout(REPO9, Branch2A, 006)
+6 fileContent1.6 M9 
+3 fileContent2.3 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+checkout(REPO9, Trunk, 006)
+4 fileContent1.4 M9 
+2 fileContent2.2 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 
+
+merge(REPO9, Branch2A, Branch1B, M9)
+void
+merge(REPO9, Branch1B, Branch1A, M9)
+void
+merge(REPO9, Branch1A, Trunk, M9)
+void
+
+checkout(REPO9, Trunk, 006)
+6 fileContent1.6 M9 
+3 fileContent2.3 M9 
+2 fileContent3.2 M9 
+1 fileContent4 M9 
+1 fileContent5 M9 

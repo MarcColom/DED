@@ -1,0 +1,486 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# EP2 test
+
+# ERROR
+mostActiveGroup()
+ERROR: There are no groups
+
+# ERROR
+mostActiveRepository()
+ERROR: There are no repositories
+
+# ERROR
+groups()
+ERROR: There are no groups
+
+# ERROR
+repositories()
+ERROR: There are no repositories
+
+# ERROR
+users()
+ERROR: There are no users
+
+addRepository(REPO1, /repo1, description1)
+void
+addRepository(REPO2, /repo2, description2)
+void
+addRepository(REPO4, /repo4, description4)
+void
+addRepository(REPO5, /repo5, description5)
+void
+
+repositories()
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+
+path: /repo2
+description: description2
+activity: 0
+branches: 
+	Trunk
+
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+path: /repo5
+description: description5
+activity: 0
+branches: 
+	Trunk
+
+
+getRepository(REPO1)
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+
+
+getRepository(REPO4)
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+
+# ERROR
+ERROR: El metode checkout(REPO1, 333) no existeix
+
+addUser(U1, joep@uoc.edu, ****)
+void
+addUser(J2, joan@uoc.edu, ****)
+void
+addUser(B3, helenap@uoc.edu, ****)
+void
+addUser(A36, marti@uoc.edu, ****)
+void
+addUser(A16, pepmarti@uoc.edu, ****)
+void
+
+users()
+A16 pepmarti@uoc.edu **** 
+
+A36 marti@uoc.edu **** 
+
+B3 helenap@uoc.edu **** 
+
+J2 joan@uoc.edu **** 
+
+U1 joep@uoc.edu **** 
+
+
+# update
+addUser(U1, josep@uoc.edu, ****)
+void
+
+users()
+A16 pepmarti@uoc.edu **** 
+
+A36 marti@uoc.edu **** 
+
+B3 helenap@uoc.edu **** 
+
+J2 joan@uoc.edu **** 
+
+U1 josep@uoc.edu **** 
+
+
+# ERROR
+
+groups()
+ERROR: There are no groups
+
+addGroup(G1, Group 1)
+void
+addGroup(G2, Group 2)
+void
+addGroup(G3, Group 3)
+void
+addGroup(G4, Group 4)
+void
+addGroup(G5, Group 5)
+void
+
+
+groups()
+G1 Group 1 activity: 0
+
+G2 Group 2 activity: 0
+
+G3 Group 3 activity: 0
+
+G4 Group 4 activity: 0
+
+G5 Group 5 activity: 0
+
+
+# ERROR
+groupAddUser(GXX, U1)
+ERROR: Group not found
+
+# ERROR
+groupAddUser(G1, UXXX)
+ERROR: User not found
+
+groupAddUser(G1, U1)
+void
+groupAddUser(G2, U1)
+void
+
+groupAddUser(G4, B3)
+void
+groupAddUser(G5, B3)
+void
+
+groupAddUser(G3, A36)
+void
+
+users()
+A16 pepmarti@uoc.edu **** 
+
+A36 marti@uoc.edu **** 
+	G3 Group 3 activity: 0
+
+B3 helenap@uoc.edu **** 
+	G4 Group 4 activity: 0
+	G5 Group 5 activity: 0
+
+J2 joan@uoc.edu **** 
+
+U1 josep@uoc.edu **** 
+	G1 Group 1 activity: 0
+	G2 Group 2 activity: 0
+
+
+repositoryAddGroup(REPO1, G1)
+void
+repositoryAddGroup(REPO1, G3)
+void
+
+repositoryAddGroup(REPO2, G4)
+void
+
+repositories()
+path: /repo1
+description: description1
+activity: 0
+branches: 
+	Trunk
+groups: 
+	G1 Group 1 activity: 0
+	G3 Group 3 activity: 0
+
+
+path: /repo2
+description: description2
+activity: 0
+branches: 
+	Trunk
+groups: 
+	G4 Group 4 activity: 0
+
+
+path: /repo4
+description: description4
+activity: 0
+branches: 
+	Trunk
+
+path: /repo5
+description: description5
+activity: 0
+branches: 
+	Trunk
+
+
+# ERROR
+commit(REPO99999, Trunk, 1, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld)
+ERROR: Repository not found
+
+# ERROR
+commit(REPO1, Trunk, 1, XXXXX1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld)
+ERROR: User not found
+
+# ERROR  B3 - Repo 1
+commit(REPO1, Trunk, 1, B3, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld)
+ERROR: No privileges on this repo
+
+# ERROR  A16 - Repo 1
+commit(REPO1, Trunk, 333, A16, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld)
+ERROR: No privileges on this repo
+
+# ERROR  J2 - Repo 1
+commit(REPO1, Trunk, 333, J2, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld)
+ERROR: No privileges on this repo
+
+
+commit(REPO1, Trunk, 333, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld (333))
+void
+commit(REPO1, Trunk, 333, U1, 15-10-2014 15:30:00, /src/Main.java, public class Main (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/Test.java, public class Test (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/ApiHelper.java, public class ApiHelper (333))
+void
+commit(REPO1, Trunk, 333, A36, 15-10-2014 15:30:00, /src/DBUtils.java, public class DBUtils (333))
+void
+
+commit(REPO1, Trunk, 334, U1, 14-10-2014 15:35:00, /src/HelloWorld.java, public class HelloWorld // msg1 (334))
+void
+commit(REPO1, Trunk, 334, U1, 15-10-2014 15:35:00, /src/Main.java, public class Main // msg1 (334))
+void
+
+commit(REPO1, Trunk, 335, U1, 14-10-2014 15:40:00, /src/HelloWorld.java, public class HelloWorld // msg2 (335))
+void
+commit(REPO1, Trunk, 335, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2 (335))
+void
+
+# error
+commit(REPO1, Trunk, 333, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2)
+ERROR: Revision already exists
+
+
+# Repo 2
+
+# ERROR A16 - Repo 2
+commit(REPO2, Trunk, 100, A16, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg a16)
+ERROR: No privileges on this repo
+
+# ERROR A36 - Repo 2
+commit(REPO2, Trunk, 100, A36, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg a36)
+ERROR: No privileges on this repo
+
+# ERROR U1 - Repo 2
+commit(REPO2, Trunk, 100, U1, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg u1)
+ERROR: No privileges on this repo
+
+commit(REPO2, Trunk, 100, B3, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg B3)
+void
+
+
+mostActiveRepository()
+path: /repo1
+description: description1
+activity: 9
+branches: 
+	Trunk
+groups: 
+	G1 Group 1 activity: 6
+	G3 Group 3 activity: 3
+
+
+mostActiveGroup()
+G1 Group 1 activity: 6
+
+
+
+# ERROR
+getFile(REPO1, Trunk, 9999, /src/Main.java)
+ERROR: Revision not found
+
+getFile(REPO1, Trunk, 333, /src/Main.java)
+333 public class Main (333) U1 
+
+getFile(REPO1, Trunk, 334, /src/Main.java)
+334 public class Main // msg1 (334) U1 
+
+getFile(REPO1, Trunk, 335, /src/Main.java)
+335 public class Main // msg2 (335) U1 
+
+getFile(REPO1, Trunk, 333, /src/HelloWorld.java)
+333 public class HelloWorld (333) U1 
+
+getFile(REPO1, Trunk, 334, /src/HelloWorld.java)
+334 public class HelloWorld // msg1 (334) U1 
+
+getFile(REPO1, Trunk, 335, /src/HelloWorld.java)
+335 public class HelloWorld // msg2 (335) U1 
+
+
+checkout(REPO1, Trunk, 333)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+333 public class HelloWorld (333) U1 
+333 public class Main (333) U1 
+333 public class Test (333) A36 
+
+checkout(REPO1, Trunk, 334)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+334 public class HelloWorld // msg1 (334) U1 
+334 public class Main // msg1 (334) U1 
+333 public class Test (333) A36 
+
+checkout(REPO1, Trunk, 335)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+335 public class HelloWorld // msg2 (335) U1 
+335 public class Main // msg2 (335) U1 
+333 public class Test (333) A36 
+
+checkout(REPO2, Trunk, 100)
+100 public class Main // msg B3 B3 
+
+branches(REPO1)
+Trunk
+
+branches(REPO2)
+Trunk
+
+# ERROR
+branch(REPO9999, Trunk, Branch1A, U1)
+ERROR: Repository not found
+
+# ERROR
+branch(REPO1, Tr999nk, Branch1A, U1)
+ERROR: Branch not found
+
+# ERROR
+branch(REPO1, Trunk, Branch1A, U99999)
+ERROR: User not found
+
+branch(REPO1, Trunk, Branch1A, U1)
+void
+
+branch(REPO1, Branch1A, Branch1B, U1)
+void
+
+branch(REPO1, Trunk, Branch1C, U1)
+void
+
+branches(REPO1)
+Trunk
+Branch1A
+Branch1B
+Branch1C
+
+# ERROR
+branch(REPO2, Trunk, Branch2A, U1)
+ERROR: No privileges on this repo
+
+
+branch(REPO2, Trunk, Branch2A, B3)
+void
+branch(REPO2, Branch2A, Branch2B, B3)
+void
+
+branches(REPO2)
+Trunk
+Branch2A
+Branch2B
+
+commit(REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/WebServer.java, public class WebServer // msg1 (334))
+void
+commit(REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/FireWall.java, public class FireWall // msg1 (334))
+void
+commit(REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/EndPoint.java, public class EndPoint // msg1 (334))
+void
+commit(REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/Resources.java, public class Resources // msg1 (334))
+void
+
+checkout(REPO1, Branch1A, 333)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+333 public class Test (333) A36 
+
+checkout(REPO1, Branch1A, 334)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+334 public class EndPoint // msg1 (334) U1 
+334 public class FireWall // msg1 (334) U1 
+334 public class Resources // msg1 (334) U1 
+333 public class Test (333) A36 
+334 public class WebServer // msg1 (334) U1 
+
+# ERROR
+merge(REPO9999, Branch1A, Trunk, U1)
+ERROR: Repository not found
+
+# ERROR
+merge(REPO1, Branch1AXXXXX, Trunk, U1)
+ERROR: Branch not found
+
+# ERROR
+merge(REPO1, Branch1A, TrunkXXXXXX, U1)
+ERROR: Branch not found
+
+# ERROR
+merge(REPO1, Branch1A, TrunkXXXXXX, U1)
+ERROR: Branch not found
+
+# ERROR
+merge(REPO1, Branch1A, Trunk, UXXXXXX)
+ERROR: User not found
+
+# ERROR
+merge(REPO2, Branch2A, Trunk, A36)
+ERROR: No privileges on this repo
+
+# ERROR
+merge(REPO1, Branch1A, Branch1C, U1)
+ERROR: Merge conflict
+
+checkout(REPO1, Trunk, 334)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+334 public class HelloWorld // msg1 (334) U1 
+334 public class Main // msg1 (334) U1 
+333 public class Test (333) A36 
+
+merge(REPO1, Branch1A, Trunk, U1)
+void
+
+checkout(REPO1, Trunk, 333)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+333 public class HelloWorld (333) U1 
+333 public class Main (333) U1 
+333 public class Test (333) A36 
+
+checkout(REPO1, Trunk, 334)
+333 public class ApiHelper (333) A36 
+333 public class DBUtils (333) A36 
+334 public class EndPoint // msg1 (334) U1 
+334 public class FireWall // msg1 (334) U1 
+334 public class HelloWorld // msg1 (334) U1 
+334 public class Main // msg1 (334) U1 
+334 public class Resources // msg1 (334) U1 
+333 public class Test (333) A36 
+334 public class WebServer // msg1 (334) U1 
+

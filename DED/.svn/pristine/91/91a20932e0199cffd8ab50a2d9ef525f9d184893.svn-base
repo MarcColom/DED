@@ -1,0 +1,76 @@
+package uoc.ei.practica;
+
+import java.util.Comparator;
+
+import uoc.ei.tads.Iterador;
+import uoc.ei.tads.LlistaEncadenada;
+
+public class User {
+
+	private String idUser;
+	private String email;
+	private String password;
+	private LlistaEncadenada<Group> groups;
+
+	public User(String idUser, String email, String password) {
+		this.idUser = idUser;
+		this.update(email, password);
+		this.groups=new LlistaEncadenada<Group>();
+	}
+
+	/**
+	 * comparador que defineix l'ordre global entre Usuarios
+	 */
+	public static Comparator<String>  COMP = new Comparator<String>() {
+		public int compare(String arg0, String arg1) {
+			return arg0.compareTo(arg1);
+		}		
+	};
+
+	public void update(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.idUser).append(" ");
+		sb.append(this.email).append(" ");
+		sb.append(this.password).append(" ").append(Messages.LS);
+		if (!this.groups.estaBuit()) {
+			Iterador<Group> it = this.groups.elements();
+			while (it.hiHaSeguent()) 
+				sb.append(Messages.PREFIX).append(it.seguent());
+		}
+			
+		return sb.toString();
+	}
+
+	public void addGroup(Group g) {
+		this.groups.afegirAlFinal(g);
+	}
+
+	public Iterador<Group> groups() {
+		return this.groups.elements();
+	}
+
+	public String getIdUser() {
+		return this.idUser;
+	}
+
+	/**
+	 * mètode que incrementa l'activitat dels grups d'aquest usuari
+	 */
+	public void incActivity() {
+		Iterador<Group> it = this.groups();
+		Group g=null;
+		while (it.hiHaSeguent()) {
+			g = it.seguent();
+			g.incActivity(); 
+			
+			if (SVNManagerImpl.mostActiveGroup==null || SVNManagerImpl.mostActiveGroup.getActivity()<g.getActivity()) {
+				SVNManagerImpl.mostActiveGroup = g;
+			}
+		}
+	}
+}

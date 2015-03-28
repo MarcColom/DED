@@ -1,0 +1,103 @@
+package uoc.ei.practica;
+
+import java.util.Date;
+
+import uoc.ei.tads.Contenidor;
+import uoc.ei.tads.Iterador;
+
+public class Repository {
+	private IdentifiedList<File> files;
+	private String path;
+	private String description;
+	private IdentifiedList<Group> groups;
+	private int activity;
+
+	
+	public Repository(int idRepository, String path, String description) {
+		this.files=new IdentifiedList<File>();
+		this.groups= new IdentifiedList<Group>();
+		this.path=path;
+		this.description=description;
+	}
+
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("path: ").append(this.path).append(Messages.LS);
+		sb.append("description: ").append(this.description).append(Messages.LS);
+		sb.append("activity: ").append(this.activity).append(Messages.LS);
+
+		if (this.files.estaBuit()) sb.append(Messages.PREFIX).append("no files");
+		else {
+			Iterador<File> it = this.files.elements();
+			while (it.hiHaSeguent()) 
+				sb.append(Messages.PREFIX).append(it.seguent());
+			
+		}
+		if (!this.groups.estaBuit()) {
+			sb.append(Messages.LS);
+			Iterador<Group> it = this.groups.elements();
+			while (it.hiHaSeguent()) 
+				sb.append(Messages.PREFIX).append(it.seguent());
+		}
+
+		sb.append(Messages.LS);
+		return sb.toString();
+	}
+
+	public void addGroup(Group group) {
+		this.groups.afegirAlFinal(group);
+	}
+
+	public boolean hasPermission(User user) {
+		boolean found = false;
+		Group g= null;
+		
+		Iterador<Group> groupsUser = user.groups();
+        while (groupsUser.hiHaSeguent() && !found)  {
+        	g = groupsUser.seguent();
+        	found = (this.groups.getIdentifiedObject(g.getIdentifier())!=null);
+        }
+		
+		return found;
+	}
+
+	public void addRevision(User user, Date dateTime, String filePath,
+			String newSourceCode, int idRevision) {
+		File f = this.files.getIdentifiedObject(filePath);
+		if (f==null) f = addFile(filePath);
+		f.addRevision(user, dateTime, newSourceCode, idRevision);
+		
+	}
+
+	private File addFile(String filePath) {
+		File f = new File(filePath);
+		this.files.afegirAlFinal(f);
+		return f;
+	}
+
+	public Contenidor<File> files() {
+		// TODO Auto-generated method stub
+		return this.files;
+	}
+
+	public void incActivity() {
+		this.activity++;
+	}
+
+	public int getActivity() {
+		return this.activity;
+	}
+
+	public File getFile(String filePath) throws EIException {
+		File f = this.files.getIdentifiedObject(filePath, Messages.FILE_NOT_FOUND);
+		return f;
+	}
+
+	public Revision getRevision(String filePath, int idRevision) {
+		// TODO Auto-generated method stub
+		Revision r = null;
+		File f = this.files.getIdentifiedObject(filePath);
+		if (f!=null) r = f.getRevision(idRevision);
+		return r;
+	}
+}

@@ -1,0 +1,230 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# EP2 test
+
+# ERROR
+mostActiveGroup
+
+# ERROR
+mostActiveRepository
+
+# ERROR
+groups
+
+# ERROR
+repositories
+
+# ERROR
+users
+
+addRepository, REPO1, /repo1, description1
+addRepository, REPO2, /repo2, description2
+addRepository, REPO4, /repo4, description4
+addRepository, REPO5, /repo5, description5
+
+repositories
+
+getRepository, REPO1
+
+getRepository, REPO4
+
+# ERROR
+checkout, REPO1, 333
+
+addUser, U1, joep@uoc.edu, ****
+addUser, J2, joan@uoc.edu, ****
+addUser, B3, helenap@uoc.edu, ****
+addUser, A36, marti@uoc.edu, ****
+addUser, A16, pepmarti@uoc.edu, ****
+
+users
+
+# update
+addUser, U1, josep@uoc.edu, ****
+
+users
+
+# ERROR
+
+groups
+
+addGroup, G1, Group 1
+addGroup, G2, Group 2
+addGroup, G3, Group 3
+addGroup, G4, Group 4
+addGroup, G5, Group 5
+
+
+groups
+
+# ERROR
+groupAddUser, GXX, U1
+
+# ERROR
+groupAddUser, G1, UXXX
+
+groupAddUser, G1, U1
+groupAddUser, G2, U1
+
+groupAddUser, G4, B3
+groupAddUser, G5, B3
+
+groupAddUser, G3, A36
+
+users
+
+repositoryAddGroup, REPO1, G1
+repositoryAddGroup, REPO1, G3
+
+repositoryAddGroup, REPO2, G4
+
+repositories
+
+# ERROR
+commit, REPO99999,Trunk, 1, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld 
+
+# ERROR
+commit, REPO1,Trunk, 1, XXXXX1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld 
+
+# ERROR  B3 - Repo 1 
+commit, REPO1, Trunk, 1, B3, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld 
+
+# ERROR  A16 - Repo 1 
+commit, REPO1, Trunk, 333, A16, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld 
+
+# ERROR  J2 - Repo 1 
+commit, REPO1, Trunk, 333, J2, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld 
+
+
+commit, REPO1, Trunk, 333, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld (333)
+commit, REPO1, Trunk, 333, U1, 15-10-2014 15:30:00, /src/Main.java, public class Main (333)
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/Test.java, public class Test (333) 
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/ApiHelper.java, public class ApiHelper (333) 
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/DBUtils.java, public class DBUtils (333) 
+
+commit, REPO1, Trunk, 334, U1, 14-10-2014 15:35:00, /src/HelloWorld.java, public class HelloWorld // msg1 (334)
+commit, REPO1, Trunk, 334, U1, 15-10-2014 15:35:00, /src/Main.java, public class Main // msg1 (334)
+
+commit, REPO1, Trunk, 335, U1, 14-10-2014 15:40:00, /src/HelloWorld.java, public class HelloWorld // msg2 (335)
+commit, REPO1, Trunk, 335, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2 (335)
+
+# error
+commit, REPO1, Trunk, 333, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2
+
+
+# Repo 2
+
+# ERROR A16 - Repo 2
+commit, REPO2, Trunk, 100, A16, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg a16
+
+# ERROR A36 - Repo 2
+commit, REPO2, Trunk, 100, A36, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg a36
+
+# ERROR U1 - Repo 2
+commit, REPO2, Trunk, 100, U1, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg u1
+
+commit, REPO2, Trunk, 100, B3, 15-10-2014 15:40:00, /src/JTree.java, public class Main // msg B3
+
+ 
+mostActiveRepository
+mostActiveGroup
+
+
+# ERROR
+getFile, REPO1,  Trunk, 9999, /src/Main.java
+
+getFile, REPO1,  Trunk, 333, /src/Main.java
+
+getFile, REPO1,  Trunk, 334, /src/Main.java
+
+getFile, REPO1,  Trunk, 335, /src/Main.java
+
+getFile, REPO1,  Trunk, 333, /src/HelloWorld.java
+
+getFile, REPO1,  Trunk, 334, /src/HelloWorld.java
+
+getFile, REPO1,  Trunk, 335, /src/HelloWorld.java
+
+  
+checkout, REPO1, Trunk, 333
+
+checkout, REPO1, Trunk, 334
+
+checkout, REPO1, Trunk, 335   
+
+checkout, REPO2, Trunk, 100
+ 
+branches, REPO1
+
+branches, REPO2
+
+# ERROR
+branch, REPO9999, Trunk, Branch1A, U1
+
+# ERROR
+branch, REPO1, Tr999nk, Branch1A, U1
+
+# ERROR
+branch, REPO1, Trunk, Branch1A, U99999
+
+branch, REPO1, Trunk, Branch1A, U1
+
+branch, REPO1, Branch1A, Branch1B, U1
+
+branch, REPO1, Trunk, Branch1C, U1
+
+branches, REPO1
+
+# ERROR
+branch, REPO2, Trunk, Branch2A, U1
+
+
+branch, REPO2, Trunk, Branch2A, B3
+branch, REPO2, Branch2A, Branch2B, B3
+
+branches, REPO2
+
+commit, REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/WebServer.java, public class WebServer // msg1 (334)
+commit, REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/FireWall.java, public class FireWall // msg1 (334)
+commit, REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/EndPoint.java, public class EndPoint // msg1 (334)
+commit, REPO1, Branch1A, 334, U1, 14-10-2014 15:35:00, /src/Resources.java, public class Resources // msg1 (334)
+
+checkout, REPO1, Branch1A, 333
+
+checkout, REPO1, Branch1A, 334
+
+# ERROR 
+merge, REPO9999, Branch1A, Trunk, U1
+
+# ERROR 
+merge, REPO1, Branch1AXXXXX, Trunk, U1
+
+# ERROR 
+merge, REPO1, Branch1A, TrunkXXXXXX, U1
+
+# ERROR 
+merge, REPO1, Branch1A, TrunkXXXXXX, U1
+
+# ERROR 
+merge, REPO1, Branch1A, Trunk, UXXXXXX
+
+# ERROR 
+merge, REPO2, Branch2A, Trunk, A36
+
+# ERROR
+merge, REPO1, Branch1A, Branch1C, U1
+
+checkout, REPO1, Trunk, 334
+
+merge, REPO1, Branch1A, Trunk, U1
+
+checkout, REPO1, Trunk, 333
+
+checkout, REPO1, Trunk, 334
+

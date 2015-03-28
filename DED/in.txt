@@ -1,0 +1,152 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# PRACTICA test MARC COLOM ROYO
+
+addRepository, REPO1, /repo1, description1
+addRepository, REPO2, /repo2, description2
+addRepository, REPO4, /repo4, description4
+addRepository, REPO5, /repo5, description5
+addRepository, REPO9, /repo9, description9
+
+repositories
+
+getRepository, REPO9
+
+addUser, U1, joep@uoc.edu, ****
+addUser, J2, joan@uoc.edu, ****
+addUser, M9, marc@uoc.edu, ****
+addUser, B3, helenap@uoc.edu, ****
+addUser, A36, marti@uoc.edu, ****
+addUser, A16, pepmarti@uoc.edu, ****
+
+users
+
+
+# ERROR
+
+groups
+
+addGroup, G1, Group 1
+addGroup, G2, Group 2
+addGroup, G3, Group 3
+addGroup, G4, Group 4
+addGroup, G5, Group 5
+addGroup, G9, Group 9
+
+
+groups
+
+groupAddUser, G1, U1
+groupAddUser, G2, U1
+
+groupAddUser, G4, B3
+groupAddUser, G5, B3
+
+groupAddUser, G3, A36
+
+groupAddUser, G9, U1
+groupAddUser, G9, M9
+
+users
+
+repositoryAddGroup, REPO1, G1
+repositoryAddGroup, REPO1, G3
+
+repositoryAddGroup, REPO9, G9
+
+repositories
+
+
+commit, REPO1, Trunk, 333, U1, 14-10-2014 15:30:00, /src/HelloWorld.java, public class HelloWorld (333)
+commit, REPO1, Trunk, 333, U1, 15-10-2014 15:30:00, /src/Main.java, public class Main (333)
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/Test.java, public class Test (333) 
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/ApiHelper.java, public class ApiHelper (333) 
+commit, REPO1, Trunk, 333, A36,15-10-2014 15:30:00, /src/DBUtils.java, public class DBUtils (333) 
+
+commit, REPO1, Trunk, 334, U1, 14-10-2014 15:35:00, /src/HelloWorld.java, public class HelloWorld // msg1 (334)
+commit, REPO1, Trunk, 334, U1, 15-10-2014 15:35:00, /src/Main.java, public class Main // msg1 (334)
+
+commit, REPO1, Trunk, 335, U1, 14-10-2014 15:40:00, /src/HelloWorld.java, public class HelloWorld // msg2 (335)
+commit, REPO1, Trunk, 335, U1, 15-10-2014 15:40:00, /src/Main.java, public class Main // msg2 (335)
+
+
+# Repo 9
+
+commit, REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file1, fileContent1
+commit, REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file2, fileContent2
+commit, REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file3, fileContent3
+commit, REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file4, fileContent4
+commit, REPO9, Trunk, 001, M9, 01-01-2015 10:00:00, file5, fileContent5
+
+commit, REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file1, fileContent1.2
+commit, REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file2, fileContent2.2
+commit, REPO9, Trunk, 002, M9, 01-01-2015 10:00:00, file3, fileContent3.2
+
+commit, REPO9, Trunk, 003, M9, 01-01-2015 10:00:00, file1, fileContent1.3
+
+commit, REPO9, Trunk, 004, M9, 01-01-2015 10:00:00, file1, fileContent1.4
+
+ 
+mostActiveRepository
+mostActiveGroup
+
+
+getFile, REPO9,  Trunk, 001, file1
+
+getFile, REPO9,  Trunk, 002, file1
+
+getFile, REPO9,  Trunk, 003, file1
+
+getFile, REPO9,  Trunk, 004, file1
+
+getFile, REPO9,  Trunk, 002, file2
+
+  
+checkout, REPO9, Trunk, 001
+
+checkout, REPO9, Trunk, 002
+
+checkout, REPO9, Trunk, 003   
+
+checkout, REPO9, Trunk, 004
+
+checkout, REPO1, Trunk, 335
+ 
+branches, REPO9
+
+branch, REPO9, Trunk, Branch1A, M9
+
+checkout, REPO9, Trunk, 004
+
+checkout, REPO9, Branch1A, 004
+
+branch, REPO9, Branch1A, Branch1B, M9
+
+checkout, REPO9, Branch1B, 004
+
+branch, REPO9, Branch1B, Branch2A, M9
+
+checkout, REPO9, Branch2A, 004
+
+branches, REPO9
+
+commit, REPO9, Branch2A, 005, M9, 01-01-2015 12:00:00, file1, fileContent1.5
+commit, REPO9, Branch2A, 006, M9, 01-01-2015 12:00:00, file1, fileContent1.6
+commit, REPO9, Branch2A, 003, M9, 01-01-2015 12:00:00, file2, fileContent2.3
+
+
+checkout, REPO9, Branch2A, 006
+
+checkout, REPO9, Trunk, 006
+
+merge, REPO9, Branch2A, Branch1B, M9
+merge, REPO9, Branch1B, Branch1A, M9
+merge, REPO9, Branch1A, Trunk, M9
+
+checkout, REPO9, Trunk, 006
